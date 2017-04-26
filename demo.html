@@ -1,0 +1,59 @@
+<html>
+<head>
+<script src="js-data/lucep_countryarealist.js"></script>
+<script src="js-data/lucep_countrylist.js"></script>
+<script src="js/lucep_country_lookup.min.js"></script>
+<script type='text/javascript'>
+$lucep_country_lookup.load_countryarea_data(lucep_country_area_list); //load data from countryarealist.js
+$lucep_country_lookup.load_country_data(lucep_country_list); //load data from countrylist.js
+</script>
+<title>Demo</title>
+</head>
+<body>
+<h1>Lucep Phone Number Country Lookup JavaScript</h1>
+<hr size=5>
+<h2>About</h2>
+<h4>Using publicly available <a href='https://www.aggdata.com/free/international-calling-codes'>telephone number datasets</a> and restructuring them a little to reduce search time, the geographic registered location of a telephone number can be provided without querying other servers.</h4>
+<h4>Coupled with <a href='https://github.com/jackocnr'>jackocnr's</a> <a href='https://github.com/jackocnr/intl-tel-input/blob/master/src/js/utils.js'>custom build</a> of <a href='https://github.com/googlei18n/libphonenumber/tree/master/javascript'>libphonenumber</a>, some cool stuff is possible</h4>
+<h2>Demo</h2>
+<div id='instructions'>
+	<div id='prompt'>
+		Enter an international dialling number without the leading '+'
+	</div>
+	<div id='input-number'>
+		<input type='tel' id='number-to-check' placeholder='12135558877' />
+	</div>
+	<div id='input-submit'>
+		<button id='do-lookup'>Lookup this number</button>
+	</div>
+</div>
+<div id='results'>
+
+</div>
+<h2>Download</h2>
+Please download the latest code from <a href="https://github.com/lucep/phonenumber-country-lookup">Github</a>
+<h2>Github</h2>
+Please contribute, fork, etc on <a href="https://github.com/lucep/phonenumber-country-lookup">Github</a>
+<h2>Boring stuff</h2>
+License, bla bla, MIT.</br>
+Copyright (c) 2017 <a href="https://lucep.com">Lucep</a>
+<script type='text/javascript'>
+document.getElementById("do-lookup").addEventListener(
+	"click",
+	function (e){
+		var result = $lucep_country_lookup.get_country_area_from_number(document.getElementById("number-to-check").value);
+		var output = document.getElementById('results');
+		if (typeof result == 'undefined'){
+			output.innerHTML = "Unable to deterime country/area. Please ensure you are entering numbers only (with the +)";
+		}else{
+			output.innerHTML = "Country: " + result.country_name;
+			output.innerHTML += result.area_name ? "<br/>Area code: "+result.area_name : "";
+			output.innerHTML += "<br/>Country code: "+result.country_code;
+			output.innerHTML += result.area_code ? "<br/>Area code: "+result.area_code : "";
+			output.innerHTML += result.country_area_code ? "<br/>Country and area code: "+result.country_area_code : "";
+		}
+
+	});	
+</script>
+</body>
+</html>
