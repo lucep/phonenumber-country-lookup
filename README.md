@@ -15,6 +15,6 @@ The lookup script is less than 1k (minified), and the number datasets are around
 Clone the repo and launch demo.html in your browser!
 
 ## License
-MIT
+GNU GPLv3
 
 Copyright (c) 2017 [Lucep](https://lucep.com)
