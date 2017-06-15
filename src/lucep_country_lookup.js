@@ -12,7 +12,11 @@ if (!String.prototype.startsWith) {
 	lcl["get_country_area_from_number"] = function (full_number){
 		var lookup_str = full_number.toString();
 		var lookup_arr = lookup_str.split("");
-		var results = ca[lookup_arr[0]][lookup_arr[1]][lookup_arr[2]];
+		if (typeof ca[lookup_arr[0]] == 'object' && typeof ca[lookup_arr[0]][lookup_arr[1]] == 'object')
+			var results = ca[lookup_arr[0]][lookup_arr[1]][lookup_arr[2]];
+		else
+			return; //not possible to determine
+		
 		if (typeof results == 'undefined')
 			return lcl["get_country_code_from_number"](full_number);
 		else if (results.length == 1){
